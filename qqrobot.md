@@ -48,7 +48,8 @@ python main.py
 
 点开path
 
-![image-20230206215937178](https://github.com/luoguixin/qqrobot/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_220301.png)
+![image-20230206215937178](https://github.com/luoguixin/qqrobot/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_215915.png
+)
 
 新建添加刚刚ffmpeg的存放地址C:\Program Files\ffmpeg\bin
 
