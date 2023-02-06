@@ -67,7 +67,11 @@ python main.py
 
 接下来用管理员身份打开cmd
 
-输入setx /M PATH "C:\Program Files\ffmpeg\bin;%PATH%"
+输入
+
+~~~python
+setx /M PATH "C:\Program Files\ffmpeg\bin;%PATH%"
+~~~
 
 回车出现成功就行
 
