@@ -34,11 +34,11 @@ python main.py
 
 点开属性
 
-<img src="C:\Users\30524\Pictures\Screenshots\屏幕截图_20230206_215454.png" alt="屏幕截图_20230206_215454" style="zoom:50%;" />
+<img src="https://github.com/luoguixin/qqrobot/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_215454.png" alt="屏幕截图_20230206_215454" style="zoom:50%;" />
 
 找到高级系统设置
 
-![image-20230206215801582](C:\Users\30524\AppData\Roaming\Typora\typora-user-images\image-20230206215801582.png)
+![image-20230206215801582]()
 
 点开环境变量
 
