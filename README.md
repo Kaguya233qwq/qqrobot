@@ -26,7 +26,8 @@ python main.py
 
 ### 安装ffmpeg
 
-可以去[ffmpeg](https://ffmpeg.org/download.html)下载最新版安装
+可以去[ffmpeg](https://ffmpeg.org/download.html)下载最新版安装，如果觉得下载速度慢可以用这个[ffmpeg](https://pan.baidu.com/s/1fjNt_ETij787CtEQvXi9PA?pwd=02uw )
+
 
 #### 安装方法
 
