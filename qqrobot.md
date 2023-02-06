@@ -38,17 +38,17 @@ python main.py
 
 找到高级系统设置
 
-![image-20230206215801582]()
+![image-20230206215801582](https://github.com/luoguixin/qqrobot/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_215744.png)
 
 点开环境变量
 
-![image-20230206215857225](C:\Users\30524\AppData\Roaming\Typora\typora-user-images\image-20230206215857225.png)
+![image-20230206215857225](https://github.com/luoguixin/qqrobot/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_215842.png)
 
 
 
 点开path
 
-![image-20230206215937178](C:\Users\30524\AppData\Roaming\Typora\typora-user-images\image-20230206215937178.png)
+![image-20230206215937178](https://github.com/luoguixin/qqrobot/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_220301.png)
 
 新建添加刚刚ffmpeg的存放地址C:\Program Files\ffmpeg\bin
 
@@ -60,7 +60,7 @@ python main.py
 
 出现
 
-![image-20230206220306780](C:\Users\30524\AppData\Roaming\Typora\typora-user-images\image-20230206220306780.png)
+![image-20230206220306780](https://github.com/luoguixin/qqrobot/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_220301.png)
 
 就算安装完成了
 
