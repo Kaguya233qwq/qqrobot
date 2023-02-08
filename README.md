@@ -77,6 +77,7 @@ setx /M PATH "C:\Program Files\ffmpeg\bin;%PATH%"
 回车出现成功就行
 
 至此安装完成
+进入info.ini按照提示填写
 
 ### 本机器人目前功能有
 
