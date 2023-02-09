@@ -6,7 +6,12 @@ import menu
 import sqlite3
 import time
 import json
-
+from wsgiref.simple_server import make_server
+from configparser import ConfigParser
+import wenxin_api  # 可以通过"pip install wenxin-api"命令安装
+from wenxin_api.tasks.free_qa import FreeQA
+config = ConfigParser()
+config.read(r"info.ini", encoding="utf-8")
 app = Flask(__name__)
 
 
@@ -244,7 +249,7 @@ class API:
     @staticmethod
     def url_query(message):
         try:
-            new_message = str(re.findall(r"查询域名状态(.*)", message)[0]).replace(" ","")
+            new_message = str(re.findall(r"查询域名状态(.*)", message)[0]).replace(" ", "")
             url = "https://xiaoapi.cn/API/zs_icp.php"
             params = {
                 "url": new_message
@@ -345,7 +350,7 @@ class API:
         return data
 
     @staticmethod
-    def anwei():
+    def an_wei():
         url = "https://v.api.aa1.cn/api/api-wenan-anwei/index.php"
         params = {
             "type": "json"
@@ -358,7 +363,7 @@ class API:
     def girl_url():
         url = "https://v.api.aa1.cn/api/api-girl-11-02/index.php"
         params = {
-            "type":"json"
+            "type": "json"
         }
         rep = requests.get(url, params)
         data = rep.json()["mp4"]
@@ -374,6 +379,34 @@ class API:
         rep = requests.get(url, params)
         js = rep.text.split(":")[2].replace('"}', "").replace('"', "")
         return js
+
+    @staticmethod
+    def wen_xin(message):
+        wenxin_api.ak = config.get("other", "wenxin_api.ak")
+        wenxin_api.sk = config.get("other", "wenxin_api.sk")
+        input_dict = {
+            "text": f"问题:{message}\n回答:",
+            "seq_len": 512,
+            "topp": 0.5,
+            "penalty_score": 1.2,
+            "min_dec_len": 2,
+            "min_dec_penalty_text": "。?：！[<S>]",
+            "is_unidirectional": 0,
+            "task_prompt": "qa",
+            "mask_type": "paragraph"
+        }
+        rst = FreeQA.create(**input_dict)
+        return rst["result"]
+
+    @staticmethod
+    def host_start(message):
+        url = "http://127.0.0.1:5700/send_private_msg"
+        params = {
+            "user_id": config.get("host", "super_user_id"),
+            "message": message,
+            "auto_escape": False
+        }
+        requests.get(url, params)
 
 
 @app.route('/', methods=["POST"])
@@ -391,4 +424,8 @@ def post_data():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5701)
+    print("服务器启动成功")
+    API.host_start("主人我启动成功了哦")
+    server = make_server('0.0.0.0', 5701, app)
+    server.serve_forever()
+    app.run()
