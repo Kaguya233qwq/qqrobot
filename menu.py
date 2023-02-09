@@ -42,6 +42,9 @@ def menu():
             if "第二页" in new_data:
                 API.send("没了")
 
+            else:
+                API.send("祝你好运!!")
+
     elif message.startswith("梦幻"):
         new_message = message.replace("梦幻", "")
         if new_message == "":
@@ -84,6 +87,7 @@ def menu():
         API.send(new_weather)
 
     elif message.startswith("搜索视频"):
+        API.send("正在搜索中.....")
         data = API.video(message)
         if data == 0:
             API.send("没有这个视频")
@@ -154,16 +158,20 @@ def menu():
             API.send("你是什么东西!!!")
 
     elif "安慰" in message:
-        data = API.anwei()
+        data = API.an_wei()
         API.send(data)
 
     elif "随机视频" == message:
         girl = API.girl_url()
         API.send(f"[CQ:video,file=http:{girl}]")
 
-    elif "文心" in message:
+    elif "文心" == message:
         datas = API.abuse()
         API.send(f"[CQ:tts,text={datas}]")
+
+    elif message.startswith("文心") and int(host) == uid:
+        result = API.wen_xin(message)
+        API.send(result)
 
     else:
         pass
