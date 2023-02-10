@@ -101,4 +101,4 @@ setx /M PATH "C:\Program Files\ffmpeg\bin;%PATH%"
 
 ### 联系方式
 
-可以加qq群784469488
+可以加qq群784469588
