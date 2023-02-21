@@ -10,6 +10,7 @@
 ~~~python
 pip install flask
 pip install requests
+pip install openai
 ~~~
 
 
@@ -101,4 +102,4 @@ setx /M PATH "C:\Program Files\ffmpeg\bin;%PATH%"
 
 ### 联系方式
 
-可以加qq群784469588
+可以加qq群784469588(有很多隐藏指令,只是因为我不想写那么多菜单，请见谅)
