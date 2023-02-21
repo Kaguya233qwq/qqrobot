@@ -1,17 +1,19 @@
 import random
 import re
+import openai
 from flask import Flask, request
 import requests
 import menu
 import sqlite3
 import time
 import json
-from wsgiref.simple_server import make_server
 from configparser import ConfigParser
-import wenxin_api  # 可以通过"pip install wenxin-api"命令安装
-from wenxin_api.tasks.free_qa import FreeQA
+
 config = ConfigParser()
 config.read(r"info.ini", encoding="utf-8")
+host = config.get("host", "super_user_id")
+approve = config.get("others", "approve")
+chatgpt_api = config.get("others", "chatgpt_api")
 app = Flask(__name__)
 
 
@@ -38,6 +40,42 @@ class API:
             }
         url = "http://127.0.0.1:5700/send_msg"
 
+        requests.get(url, params=params)
+
+    @staticmethod
+    def other_send_group(message):
+        data = request.get_json()
+        group_id = data["group_id"]
+        params = {
+            "auto_escape": False,
+            "message": message,
+            "group_id": group_id
+        }
+        url = "http://127.0.0.1:5700/send_group_msg"
+        requests.get(url, params=params)
+
+    @staticmethod
+    def other_send_private(message, group_id=None):
+        data = request.get_json()
+        user_id = data["user_id"]
+        params = {
+            "auto_escape": False,
+            "message": message,
+            "user_id": user_id,
+            "group_id": group_id
+        }
+        url = "http://127.0.0.1:5700/send_private_msg"
+        requests.get(url, params=params)
+
+    @staticmethod
+    def other_send_host(message):
+        data = request.get_json()
+        params = {
+            "auto_escape": False,
+            "message": message,
+            "user_id": host
+        }
+        url = "http://127.0.0.1:5700/send_private_msg"
         requests.get(url, params=params)
 
     @staticmethod
@@ -180,14 +218,13 @@ class API:
         try:
             music_qq_id = res["data"]["song"]["itemlist"][0]["id"]
             content = f"[CQ:music,type=qq,id={music_qq_id}]"
-            return content
-        except:
-            pass
-        return "ok"
+            return content, music_qq_id
+        except EnvironmentError as e:
+            return e
 
     @staticmethod
     def one_speak():
-        url = "https://api.wrdan.com/hitokoto"  # 一言
+        url = "https://api.wrdan.com/hitokoto"
         rep = requests.get(url)
         js = rep.json()
         content = js["text"]
@@ -195,7 +232,7 @@ class API:
 
     @staticmethod
     def boast():
-        url = "https://api.shadiao.pro/chp"  # 彩虹屁
+        url = "https://api.shadiao.pro/chp"
         rep = requests.get(url)
         data = rep.json()
         text = data["data"]["text"]
@@ -211,12 +248,15 @@ class API:
     @staticmethod
     def weather(message):
         location = str(re.findall(r"(.*)天气", message)[0]).replace(" ", "")
-        url = "http://yichen.api.z7zz.cn/api/qqtq.php"
+        url = "https://xiaoapi.cn/API/zs_tq.php"
         params = {
-            "msg": location
+            "msg": location,
+            "n": "1",
+            "num": "20",
+            "type": "cytq",
         }
         rep = requests.get(url, params)
-        return rep.text
+        return rep.json()
 
     @staticmethod
     def video(message):
@@ -381,24 +421,6 @@ class API:
         return js
 
     @staticmethod
-    def wen_xin(message):
-        wenxin_api.ak = config.get("other", "wenxin_api.ak")
-        wenxin_api.sk = config.get("other", "wenxin_api.sk")
-        input_dict = {
-            "text": f"问题:{message}\n回答:",
-            "seq_len": 512,
-            "topp": 0.5,
-            "penalty_score": 1.2,
-            "min_dec_len": 2,
-            "min_dec_penalty_text": "。?：！[<S>]",
-            "is_unidirectional": 0,
-            "task_prompt": "qa",
-            "mask_type": "paragraph"
-        }
-        rst = FreeQA.create(**input_dict)
-        return rst["result"]
-
-    @staticmethod
     def host_start(message):
         url = "http://127.0.0.1:5700/send_private_msg"
         params = {
@@ -407,6 +429,107 @@ class API:
             "auto_escape": False
         }
         requests.get(url, params)
+
+    @staticmethod
+    def api_postmen(message):
+        new_message = str(re.findall("快递查询(.*)", message)[0])
+        if new_message.isdigit():
+            url = "https://xiaoapi.cn/API/zs_kd.php"
+            params = {
+                "num": new_message
+            }
+            resp = requests.get(url, params=params)
+            result = resp.json()
+            return result["msg"]
+        else:
+            return "请输入正确的快递单号"
+
+    @staticmethod
+    def api_news(message):
+        new_message = str(re.findall(r"[1-9]", message)[0])
+        if new_message.isdigit():
+            url = "https://xiaoapi.cn/API/zs_xw.php"
+            params = {
+                "num": message
+            }
+            resp = requests.get(url, params=params)
+            result = resp.json()["msg"]
+            return result
+        else:
+            return "你没学过数学吗？"
+
+    @staticmethod
+    def api_url(message):
+        new_message = str(re.findall("缩短网址(.*)", message)[0]).replace(" ", "")
+        url = "https://xiaoapi.cn/API/dwz.php"
+        params = {
+            "url": new_message
+        }
+        resp = requests.get(url, params=params)
+        return resp.text
+
+    @staticmethod
+    def get_group_list():
+        url = "http://127.0.0.1:5700/get_group_list"
+        params = {
+            "no_cache": False
+        }
+        group_list = requests.get(url, params=params)
+        result = group_list.json()["data"]
+        temp = []
+        group_id_list = []
+        for i in result:
+            temp.append(f'{i["group_name"]}:{i["group_id"]}')
+            group_id_list.append(i["group_id"])
+        return temp, group_id_list
+
+    @staticmethod
+    def repost_group(message, group_id):
+        params = {
+            "auto_escape": False,
+            "message": message,
+            "group_id": group_id
+        }
+        url = "http://127.0.0.1:5700/send_group_msg"
+        requests.get(url, params=params)
+
+    @staticmethod
+    def invite_group(flag, sub_type):
+        if approve == "True":
+            params = {
+                "flag": flag,
+                "sub_type": sub_type,
+                "approve": True,
+            }
+            url = "http://127.0.0.1:5700/set_group_add_request"
+            requests.get(url, params=params)
+        else:
+            params = {
+                "flag": flag,
+                "sub_type": sub_type,
+                "approve": False,
+                "reason": "我是机器人我不想进群，也不同意陌生人加群"
+            }
+            url = "http://127.0.0.1:5700/set_group_add_request"
+            requests.get(url, params=params)
+
+    @staticmethod
+    def askChatGPT(question):
+        openai.api_key = chatgpt_api
+        prompt = question
+        model_engine = "text-davinci-003"
+
+        completions = openai.Completion.create(
+            engine=model_engine,
+            prompt=prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.5,
+        )
+
+        message = completions.choices[0].text
+        return message
 
 
 @app.route('/', methods=["POST"])
@@ -419,13 +542,9 @@ def post_data():
         print(message)
         menu.menu()
     else:
-        pass
+        menu.others()
     return "OK"
 
 
 if __name__ == '__main__':
-    print("服务器启动成功")
-    API.host_start("主人我启动成功了哦")
-    server = make_server('0.0.0.0', 5701, app)
-    server.serve_forever()
-    app.run()
+    app.run(host='0.0.0.0', port=5701)
