@@ -17,7 +17,8 @@ pip install openai
 
 ## 部署方法
 
-首先打开qq_login 双击go-cqhttp.exe 然后打开go-cqhttp.bat文件。选择0 的http 协议，然后在生成的config.yum里面填写机器人QQ号 然后双击go-cqhttp.bat 运行用机器人qq扫码登录。
+
+首先打开info.ini填写主人QQ号,以及openai的apikey,打开qq_login 双击go-cqhttp.exe 然后打开go-cqhttp.bat文件。选择0 的http 协议，然后在生成的config.yum里面填写机器人QQ号 然后双击go-cqhttp.bat 运行用机器人qq扫码登录。
 
 然后到项目根目录打开cmd 输入
 
