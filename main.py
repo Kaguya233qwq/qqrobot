@@ -515,21 +515,24 @@ class API:
 
     @staticmethod
     def askChatGPT(question):
-        openai.api_key = chatgpt_api
-        prompt = question
-        model_engine = "text-davinci-003"
+        try:
+            openai.api_key = chatgpt_api
+            prompt = question
+            model_engine = "text-davinci-003"
 
-        completions = openai.Completion.create(
-            engine=model_engine,
-            prompt=prompt,
-            max_tokens=1024,
-            n=1,
-            stop=None,
-            temperature=0.5,
-        )
+            completions = openai.Completion.create(
+                engine=model_engine,
+                prompt=prompt,
+                max_tokens=1024,
+                n=1,
+                stop=None,
+                temperature=0.5,
+            )
 
-        message = completions.choices[0].text
-        return message
+            message = completions.choices[0].text
+            return message
+        except:
+            return "AI正在维护中请联系开发者"
 
 
 @app.route('/', methods=["POST"])
