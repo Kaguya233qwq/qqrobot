@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
 import re
+import tempfile
 import time
+import zipfile
+import requests
 from flask import request
 from main import API
 from configparser import ConfigParser
@@ -7,8 +11,15 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read(r"info.ini", encoding="utf-8")
 host = config.get("host", "super_user_id")
+lover = config.get("host", "lover")
 approve = config.get("others", "approve")
-authorize_list = [host]
+authorize_list = [host, lover]
+
+
+def get_data():
+    url_ = "https://github.com/luoguixin/qqrobot/archive/refs/heads/main.zip"
+    response = requests.get(url_)
+    return response.content
 
 
 def menu():
@@ -67,7 +78,7 @@ def menu():
         else:
             content, music_id = API.song(song_id)
             API.send(content)
-            API.send(f"音乐链接:\nhttp://tsmusic24.tc.qq.com/{music_id}.mp3")
+            API.send(f"音乐链接:\nhttps://tsmusic24.tc.qq.com/{music_id}.mp3")
 
     elif "给我起个名" == message:
         name = API.random_name()
@@ -222,6 +233,30 @@ def menu():
             API.send("已取消授权")
         else:
             API.send("该群友还没有权限")
+
+    elif "检查更新" == message and uid == int(host):
+        f1 = open("data.txt", "r", encoding="utf-8")
+        old_time = f1.readline()
+        f1.close()
+        url_api = "https://api.github.com/repos/luoguixin/qqrobot"
+        resp = requests.get(url_api)
+        update_time = resp.json()["updated_at"]
+        if old_time == update_time:
+            API.send("无需更新")
+        else:
+            API.send("正在更新中")
+            f2 = open("data.txt", "w", encoding="utf-8")
+            f2.write(update_time)
+            f2.close()
+            data = get_data()  # data为byte字节
+            _tmp_file = tempfile.TemporaryFile()  # 创建临时文件
+            _tmp_file.write(data)
+            zf = zipfile.ZipFile(_tmp_file, mode='r')
+            for names in zf.namelist():
+                f = zf.extract(names, '../')  # 解压到zip目录文件下
+                API.send(f"已更新{f}")
+            API.send("更新完成!!!!")
+            zf.close()
 
     return "OK"
 
