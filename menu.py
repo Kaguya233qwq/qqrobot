@@ -174,7 +174,7 @@ def menu():
         girl = API.girl_url()
         API.send(f"[CQ:video,file=http:{girl}]")
 
-    elif "文心" == message:
+    elif "云梦" == message:
         datas = API.abuse()
         API.send(f"[CQ:tts,text={datas}]")
         group_list = API.get_group_list()
@@ -258,7 +258,10 @@ def menu():
             API.send("更新完成!!!!")
             zf.close()
 
-    return "OK"
+    elif message.startswith("云梦"):
+        new_message = str(re.findall("云梦(.*)", message)[0])
+        result = API.Gpt_forchange(new_message)
+        API.send(result)
 
 
 def others():
