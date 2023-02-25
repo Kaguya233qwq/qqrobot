@@ -17,7 +17,7 @@ authorize_list = [host, lover]
 
 
 def get_data():
-    url_ = "https://github.com/luoguixin/qqrobot/archive/refs/heads/main.zip"
+    url_ = "https://github.com/luoguixin/update/archive/refs/heads/main.zip"
     response = requests.get(url_)
     return response.content
 
@@ -238,7 +238,7 @@ def menu():
         f1 = open("data.txt", "r", encoding="utf-8")
         old_time = f1.readline()
         f1.close()
-        url_api = "https://api.github.com/repos/luoguixin/qqrobot"
+        url_api = "https://api.github.com/repos/luoguixin/update"
         resp = requests.get(url_api)
         update_time = resp.json()["updated_at"]
         if old_time == update_time:
