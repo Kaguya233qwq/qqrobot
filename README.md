@@ -11,6 +11,7 @@
 pip install flask
 pip install requests
 pip install openai
+pip install pyyaml
 ~~~
 
 
