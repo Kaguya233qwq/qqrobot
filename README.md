@@ -37,22 +37,14 @@ python main.py
 
 点开属性
 
-<img src="https://github.com/luoguixin/qqrobot/img/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_215454.png" alt="屏幕截图_20230206_215454" style="zoom:50%;" />
 
 找到高级系统设置
 
-![image-20230206215801582](https://github.com/luoguixin/qqrobot/img/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_215744.png)
 
 点开环境变量
 
-![image-20230206215857225](https://github.com/luoguixin/qqrobot/img/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_215842.png)
-
-
-
 点开path
 
-![image-20230206215937178](https://github.com/luoguixin/qqrobot/img/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_215915.png
-)
 
 新建添加刚刚ffmpeg的存放地址C:\Program Files\ffmpeg\bin
 
@@ -63,8 +55,6 @@ python main.py
 最后win + R 输入cmd  在终端里面输入ffmpeg -version
 
 出现
-
-![image-20230206220306780](https://github.com/luoguixin/qqrobot/img/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230206_220301.png)
 
 就算安装完成了
 
