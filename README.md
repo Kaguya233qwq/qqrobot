@@ -37,16 +37,23 @@ python main.py
 
 点开属性
 
+![1](https://github.com/luoguixin/qqrobot/blob/main/img/1.png)
 
 找到高级系统设置
 
+![2](https://github.com/luoguixin/qqrobot/blob/main/img/2.png)
 
 点开环境变量
 
+![3](https://github.com/luoguixin/qqrobot/blob/main/img/3.png)
+
 点开path
 
+![4](https://github.com/luoguixin/qqrobot/blob/main/img/4.png)
 
 新建添加刚刚ffmpeg的存放地址C:\Program Files\ffmpeg\bin
+
+![5](https://github.com/luoguixin/qqrobot/blob/main/img/5.png)
 
 复制粘贴进去
 
@@ -83,7 +90,7 @@ setx /M PATH "C:\Program Files\ffmpeg\bin;%PATH%"
 7.天气查询（触发词xxx天气）
 8.视频搜索（触发词搜索视频xxx）
 9.历史上的今天（触发词历史上的今天）
-10.域名状态查询（查询域名状态![img](file:///C:\Users\30524\AppData\Roaming\Tencent\QQ\Temp\`7_{~]GF$3{MOQ4V_}PH]YC.png)xxx.com）
+10.域名状态查询（查询域名状态xxx.com）
 11.ping（触发词pingxxx.xxx.xxx）
 12.度娘（度娘什么是xxx）
 13.翻译（翻译一下）
