@@ -1,18 +1,18 @@
 host:
-  #Ö÷ÈËQQºÅ
-  super_user_id: 3052405886
-  #ÌØ±ğ¹ØĞÄQQºÅ
-  lover:  3561409438
-  #»úÆ÷ÈËÃû×Ö
-  robot_name: ÔÆÃÎ
-  #chatgptµÄĞÕÃûÕâ¸öÒòÎªÇëÇó´ÎÊıÓĞÏŞËùÒÔ¼ÓÁËÈ¨ÏŞÏµÍ³
-  chatgpt_name: ÈğÑ©
-  #ÊäÈëÄúµÄAPI Key
-  wenxin_api.ak: vUbnE1I0ygiHGyz6wCyNZYwciI9AVIzn
-  #ÊäÈëÄúµÄSecret Key
-  wenxin_api.sk: ydZsGrL24tQ21CcEyp3dimG151QTQIhs
+  #ä¸»äººQQå·
+  super_user_id: 123456
+  #ç‰¹åˆ«å…³å¿ƒQQå·
+  lover:  1234567
+  #æœºå™¨äººåå­—
+  robot_name: xx
+  #chatgptçš„å§“åè¿™ä¸ªå› ä¸ºè¯·æ±‚æ¬¡æ•°æœ‰é™æ‰€ä»¥åŠ äº†æƒé™ç³»ç»Ÿ
+  chatgpt_name: xx
+  #è¾“å…¥æ‚¨çš„API Key
+  wenxin_api.ak: vUbnE1I
+  #è¾“å…¥æ‚¨çš„Secret Key
+  wenxin_api.sk: ydZsGrL24tQ
 others :
-  #ÑûÈºÉêÇëÊÇ·ñÍ¬ÒâTrueÊÇÍ¬Òâ,FalseÊÇ²»Í¬Òâ
+  #é‚€ç¾¤ç”³è¯·æ˜¯å¦åŒæ„Trueæ˜¯åŒæ„,Falseæ˜¯ä¸åŒæ„
   approve: True
-  #chatgptµÄapi¡ªkey
-  chatgpt_api: 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
+  #chatgptçš„apiâ€”key
+  chatgpt_api: sk-
