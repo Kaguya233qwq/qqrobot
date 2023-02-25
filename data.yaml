@@ -1,0 +1,18 @@
+host:
+  #主人QQ号
+  super_user_id: 3052405886
+  #特别关心QQ号
+  lover:  3561409438
+  #机器人名字
+  robot_name: 云梦
+  #chatgpt的姓名这个因为请求次数有限所以加了权限系统
+  chatgpt_name: 瑞雪
+  #输入您的API Key
+  wenxin_api.ak: vUbnE1I0ygiHGyz6wCyNZYwciI9AVIzn
+  #输入您的Secret Key
+  wenxin_api.sk: ydZsGrL24tQ21CcEyp3dimG151QTQIhs
+others :
+  #邀群申请是否同意True是同意,False是不同意
+  approve: True
+  #chatgpt的api—key
+  chatgpt_api: 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

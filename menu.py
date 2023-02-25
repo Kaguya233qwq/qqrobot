@@ -1,23 +1,21 @@
 # -*- coding: utf-8 -*-
 import re
-import tempfile
 import time
-import zipfile
 import requests
 from flask import request
-from main import API
-from configparser import ConfigParser
+from main import API, config
 
-config = ConfigParser()
-config.read(r"info.ini", encoding="utf-8")
-host = config.get("host", "super_user_id")
-lover = config.get("host", "lover")
-approve = config.get("others", "approve")
+host = config["host"]["super_user_id"]
+approve = config["others"]["approve"]
+chatgpt_api = config["others"]["chatgpt_api"]
+lover = config["host"]["lover"]
+robot_name = config["host"]["robot_name"]
+chatgpt_name = config["host"]["chatgpt_name"]
 authorize_list = [host, lover]
 
 
 def get_data():
-    url_ = "https://github.com/luoguixin/update/archive/refs/heads/main.zip"
+    url_ = "https://github.com/luoguixin/qqrobot/archive/refs/heads/main.zip"
     response = requests.get(url_)
     return response.content
 
@@ -50,10 +48,10 @@ def menu():
     """
         API.send(b)
 
-    elif message.startswith("梦幻"):
-        new_message = message.replace("梦幻", "")
+    elif message.startswith(robot_name):
+        new_message = message.replace(robot_name, "")
         if new_message == "":
-            new_message = "梦幻"
+            new_message = robot_name
         result = API.smart_reply(new_message)
         API.send(result)
 
@@ -160,7 +158,7 @@ def menu():
 
     elif "叫我主人" == message:
         user_id = data["user_id"]
-        if uid == int(host):
+        if uid == host:
             API.send("好的，主人")
         else:
             API.send(f"[CQ:at,qq={user_id}]你是什么东西!!!")
@@ -174,7 +172,7 @@ def menu():
         girl = API.girl_url()
         API.send(f"[CQ:video,file=http:{girl}]")
 
-    elif "云梦" == message:
+    elif robot_name == message:
         datas = API.abuse()
         API.send(f"[CQ:tts,text={datas}]")
         group_list = API.get_group_list()
@@ -195,7 +193,7 @@ def menu():
         url = API.api_url(message)
         API.send(url)
 
-    elif message.startswith("转发") and uid == int(host):
+    elif message.startswith("转发") and uid == host:
         temp, group_id_list = API.get_group_list()
         group_list = "\n".join(temp)
         API.send(f"请选择要转发的群\n一共有{len(group_id_list)}个群")
@@ -211,55 +209,31 @@ def menu():
         else:
             API.send("你最好是转发")
 
-    elif message.startswith("文心"):
-        if str(uid) in authorize_list:
-            new_message = str(re.findall("文心(.*)", message)[0])
+    elif message.startswith(chatgpt_name):
+        if uid in authorize_list:
+            new_message = str(re.findall(f"{chatgpt_name}(.*)", message)[0])
             result = API.askChatGPT(new_message)
             API.send(result)
         else:
             API.send("权限不够")
 
-    elif message.startswith("授权") and uid == int(host):
+    elif message.startswith("授权") and uid == host:
         num = str(re.findall(r"\d+", message)[0])
         if num in authorize_list:
             API.send("已授权过了")
         else:
-            authorize_list.append(num)
+            authorize_list.append(int(num))
             API.send(f"已授权[CQ:at,qq={num}]")
-    elif message.startswith("取消授权") and uid == int(host):
+    elif message.startswith("取消授权") and uid == host:
         num = str(re.findall(r"\d+", message)[0])
         if num in authorize_list:
-            authorize_list.remove(num)
+            authorize_list.remove(int(num))
             API.send("已取消授权")
         else:
             API.send("该群友还没有权限")
 
-    elif "检查更新" == message and uid == int(host):
-        f1 = open("data.txt", "r", encoding="utf-8")
-        old_time = f1.readline()
-        f1.close()
-        url_api = "https://api.github.com/repos/luoguixin/update"
-        resp = requests.get(url_api)
-        update_time = resp.json()["updated_at"]
-        if old_time == update_time:
-            API.send("无需更新")
-        else:
-            API.send("正在更新中")
-            f2 = open("data.txt", "w", encoding="utf-8")
-            f2.write(update_time)
-            f2.close()
-            data = get_data()  # data为byte字节
-            _tmp_file = tempfile.TemporaryFile()  # 创建临时文件
-            _tmp_file.write(data)
-            zf = zipfile.ZipFile(_tmp_file, mode='r')
-            for names in zf.namelist():
-                f = zf.extract(names, '../')  # 解压到zip目录文件下
-                API.send(f"已更新{f}")
-            API.send("更新完成!!!!")
-            zf.close()
-
-    elif message.startswith("云梦"):
-        new_message = str(re.findall("云梦(.*)", message)[0])
+    elif message.startswith(robot_name):
+        new_message = str(re.findall(f"{robot_name}(.*)", message)[0])
         result = API.Gpt_forchange(new_message)
         API.send(result)
 
@@ -282,7 +256,7 @@ def others():
         time2 = data["time"]
         s_l = time.localtime(time2)
         ts = time.strftime("%Y-%m-%d %H:%M:%S", s_l)
-        with open(f"登录记录.txt", "a", encoding="utf-8") as f:
+        with open(f"登录记录.txt", "a", encoding="gbk") as f:
             f.write(f"{ts}\n{client}\n")
     elif "notice_type" in data:
         notice_type = data["notice_type"]

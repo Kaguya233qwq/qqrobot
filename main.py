@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import random
 import re
 import openai
@@ -7,13 +8,14 @@ import menu
 import sqlite3
 import time
 import json
-from configparser import ConfigParser
+import yaml
 
-config = ConfigParser()
-config.read(r"info.ini", encoding="utf-8")
-host = config.get("host", "super_user_id")
-approve = config.get("others", "approve")
-chatgpt_api = config.get("others", "chatgpt_api")
+f = open("data.yaml", "r", encoding="utf-8")
+config = yaml.safe_load(f)
+f.close()
+host = config["host"]["super_user_id"]
+approve = config["others"]["approve"]
+chatgpt_api = config["others"]["chatgpt_api"]
 app = Flask(__name__)
 
 
@@ -69,7 +71,6 @@ class API:
 
     @staticmethod
     def other_send_host(message):
-        data = request.get_json()
         params = {
             "auto_escape": False,
             "message": message,
@@ -555,13 +556,12 @@ class API:
                 return "前方的区域以后再来探索吧"
             return res
         except Exception as E:
-            return f"我还不知道问题的答案"
+            return f"我还不知道问题的答案{E}"
 
 
 @app.route('/', methods=["POST"])
 def post_data():
     data = request.get_json()
-    print(data)
     if data['post_type'] == 'message':
         API.save_message()
         message = data['message']
