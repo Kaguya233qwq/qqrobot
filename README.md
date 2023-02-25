@@ -37,23 +37,23 @@ python main.py
 
 点开属性
 
-![1](https://github.com/luoguixin/qqrobot/blob/main/img/1.png)
+![1](https://github.com/luoguixin/qqrobot/blob/main/img/1.png?raw=true)
 
 找到高级系统设置
 
-![2](https://github.com/luoguixin/qqrobot/blob/main/img/2.png)
+![2](https://github.com/luoguixin/qqrobot/blob/main/img/2.png?raw=true)
 
 点开环境变量
 
-![3](https://github.com/luoguixin/qqrobot/blob/main/img/3.png)
+![3](https://github.com/luoguixin/qqrobot/blob/main/img/3.png?raw=true)
 
 点开path
 
-![4](https://github.com/luoguixin/qqrobot/blob/main/img/4.png)
+![4](https://github.com/luoguixin/qqrobot/blob/main/img/4.png?raw=true)
 
 新建添加刚刚ffmpeg的存放地址C:\Program Files\ffmpeg\bin
 
-![5](https://github.com/luoguixin/qqrobot/blob/main/img/5.png)
+![5](https://github.com/luoguixin/qqrobot/blob/main/img/5.png?raw=true)
 
 复制粘贴进去
 
