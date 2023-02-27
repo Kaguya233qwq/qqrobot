@@ -532,31 +532,8 @@ class API:
 
             message = completions.choices[0].text
             return message
-        except:
-            return "AI正在维护中请联系开发者"
-
-    @staticmethod
-    def Gpt_forchange(msg):
-        url = "https://api.forchange.cn/"
-        params = {'prompt': f"Human:{msg}↵AI:", 'tokensLength': 9}
-        try:
-            if re.search(r'^\s+', msg):
-                msg = re.sub(r'^\s+', '', msg)
-            if not re.search(r'\S', msg):
-                return "！"
-            res = requests.get(url, params=params).json()
-            res = res['choices'][0]['text']
-            if re.search(r'^\s+', res):
-                res = re.sub(r'^\s+', '', res)
-            if "访问人数" in res:
-                return "当前访问人数过多"
-            if "sorry" in res:
-                return "抱歉你的问题被吞了"
-            if "维护" in res:
-                return "前方的区域以后再来探索吧"
-            return res
         except Exception as E:
-            return f"我还不知道问题的答案{E}"
+            return E
 
 
 @app.route('/', methods=["POST"])
