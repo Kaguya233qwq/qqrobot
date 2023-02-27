@@ -232,12 +232,7 @@ def menu():
         else:
             API.send("该群友还没有权限")
 
-    elif message.startswith(robot_name):
-        new_message = str(re.findall(f"{robot_name}(.*)", message)[0])
-        result = API.Gpt_forchange(new_message)
-        API.send(result)
-
-
+            
 def others():
     data = request.get_json()
     self_id = data["self_id"]
