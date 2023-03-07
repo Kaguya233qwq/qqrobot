@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import re
 import time
-import requests
+
+import yaml
 from flask import request
 from main import API, config
 
@@ -13,13 +14,8 @@ chatgpt_name = config["host"]["chatgpt_name"]
 welcome_to_group = config["others"]["welcome_to_group"]
 menu_1 = config["others"]["menu_1"]
 menu_2 = config["others"]["menu_2"]
+welcome = config["others"]["welcome"]
 authorize_list = [host, lover]
-
-
-def get_data():
-    url_ = "https://github.com/luoguixin/qqrobot/archive/refs/heads/main.zip"
-    response = requests.get(url_)
-    return response.content
 
 
 def menu():
@@ -152,6 +148,25 @@ def menu():
         data = API.an_wei()
         API.send(data)
 
+    elif message.startswith("设置"):
+        new_message = re.findall("设置(.*)", message)[0]
+        if not new_message:
+            API.send("请输入设置+你要更改的内容")
+        elif new_message == "入群欢迎语":
+            with open("data.yaml", "r", encoding="utf-8") as f2:
+                if welcome:
+                    old_data = yaml.safe_load(f2)  # 读取文件数据
+                    old_data["others"]["welcome"] = False  # 修改读取的数据（k存在就修改对应值，k不存在就新增一组键值对）
+                    with open("data.yaml", "w", encoding="utf-8") as f:
+                        yaml.dump(old_data, f)
+                    API.send("已关闭")
+                else:
+                    old_data = yaml.safe_load(f2)  # 读取文件数据
+                    old_data["others"]["welcome"] = True  # 修改读取的数据（k存在就修改对应值，k不存在就新增一组键值对）
+                    with open("data.yaml", "w", encoding="utf-8") as f:
+                        yaml.dump(old_data, f)
+                    API.send("已开启")
+
     elif "随机视频" == message:
         API.send("正在为你寻找有趣的视频")
         girl = API.girl_url()
@@ -238,7 +253,7 @@ def others():
         ts = time.strftime("%Y-%m-%d %H:%M:%S", s_l)
         with open(f"登录记录.txt", "a", encoding="gbk") as f:
             f.write(f"{ts}\n{client}\n")
-    elif "notice_type" in data:
+    elif "notice_type" in data and welcome == "True":
         notice_type = data["notice_type"]
         user_id = data["user_id"]
         if notice_type == "group_increase":

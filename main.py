@@ -9,7 +9,7 @@ import sqlite3
 import time
 import json
 import yaml
-f = open("data.yaml", "r", encoding="gbk")
+f = open("data.yaml", "r", encoding="utf-8")
 config = yaml.safe_load(f)
 f.close()
 host = config["host"]["super_user_id"]
@@ -527,7 +527,6 @@ class API:
                 stop=None,
                 temperature=0.5,
             )
-
             message = completions.choices[0].text
             return message
         except Exception as E:
