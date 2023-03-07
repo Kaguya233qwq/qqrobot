@@ -9,8 +9,7 @@ import sqlite3
 import time
 import json
 import yaml
-
-f = open("data.yaml", "r", encoding="utf-8")
+f = open("data.yaml", "r", encoding="gbk")
 config = yaml.safe_load(f)
 f.close()
 host = config["host"]["super_user_id"]
@@ -185,8 +184,8 @@ class API:
             js = result.text
             smart_result = json.loads(js)["data"]["reply"]
             return smart_result
-        except:
-            return "ok"
+        except Exception as E:
+            return E
 
     @staticmethod
     def song(name):
@@ -520,7 +519,6 @@ class API:
             openai.api_key = chatgpt_api
             prompt = question
             model_engine = "text-davinci-003"
-
             completions = openai.Completion.create(
                 engine=model_engine,
                 prompt=prompt,

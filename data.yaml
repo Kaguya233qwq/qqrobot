@@ -1,18 +1,19 @@
 host:
-  #ä¸»äººQQå·
-  super_user_id: 123456
-  #ç‰¹åˆ«å…³å¿ƒQQå·
-  lover:  1234567
-  #æœºå™¨äººåå­—
-  robot_name: xx
-  #chatgptçš„å§“åè¿™ä¸ªå› ä¸ºè¯·æ±‚æ¬¡æ•°æœ‰é™æ‰€ä»¥åŠ äº†æƒé™ç³»ç»Ÿ
-  chatgpt_name: xx
-  #è¾“å…¥æ‚¨çš„API Key
-  wenxin_api.ak: vUbnE1I
-  #è¾“å…¥æ‚¨çš„Secret Key
-  wenxin_api.sk: ydZsGrL24tQ
+  #Ö÷ÈËQQºÅ
+  super_user_id: 3052405886
+  #ÌØ±ð¹ØÐÄQQºÅ
+  lover:  3561409438
+  #»úÆ÷ÈËÃû×Ö
+  robot_name: ÔÆÃÎ
+  #chatgptµÄÐÕÃûÕâ¸öÒòÎªÇëÇó´ÎÊýÓÐÏÞËùÒÔ¼ÓÁËÈ¨ÏÞÏµÍ³
+  chatgpt_name: ÈðÑ©
 others :
-  #é‚€ç¾¤ç”³è¯·æ˜¯å¦åŒæ„Trueæ˜¯åŒæ„,Falseæ˜¯ä¸åŒæ„
+  #ÑûÈºÉêÇëÊÇ·ñÍ¬ÒâTrueÊÇÍ¬Òâ,FalseÊÇ²»Í¬Òâ
   approve: True
-  #chatgptçš„apiâ€”key
-  chatgpt_api: sk-
+  #chatgptµÄapi¡ªkey
+  chatgpt_api: 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
+  #ÈëÈº»¶Ó­Óï
+  welcome_to_group: »¶Ó­ÈëÈº
+  #²Ëµ¥
+  menu_1: ----------²Ëµ¥1------------[1.ÈË¹¤ÖÇÕÏÃÎ»Ã£¨´¥·¢´Ê"ÃÎ»Ã"£©\n2.×ªÓïÒô£¨´¥·¢´Ê"/"£©][3.²ÊºçÆ¨£¨´¥·¢´Ê"¿ä¿äxxx"£©][4.Ò»ÑÔ£¨´¥·¢´Ê"Ò»ÑÔ"£©][5.µã¸è£¨´¥·¢´Ê"µã¸è"£©][6.Ëæ»úÐÕÃû£¨´¥·¢´Ê"¸øÎÒÆð¸öÃû"£©][7.ÌìÆø²éÑ¯£¨´¥·¢´Ê"xxxÌìÆø"£©][8.ÍøÒ×ÔÆÈÈÆÀ]
+  menu_2: ----------²Ëµ¥2------------[9.ÊÓÆµËÑË÷£¨´¥·¢´ÊËÑË÷ÊÓÆµxxx£©][10.ÀúÊ·ÉÏµÄ½ñÌì£¨´¥·¢´Ê"ÀúÊ·ÉÏµÄ½ñÌì"£©][11.ÓòÃû×´Ì¬²éÑ¯£¨"²éÑ¯ÓòÃû×´Ì¬xxx.com"£©][12.ping£¨´¥·¢´Ê"ping xxx.xxx.xxx"£©\n13.¶ÈÄï£¨"¶ÈÄïÊ²Ã´ÊÇxxx"£©][14.·­Òë£¨"·­ÒëÒ»ÏÂ"£©\n15.bÕ¾ÈÈÃÅÊÓÆµ£¨´¥·¢´Ê"bÕ¾ÈÈÃÅÊÓÆµ"£©][16.ÃþÓãÈÕÀú

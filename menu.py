@@ -7,10 +7,12 @@ from main import API, config
 
 host = config["host"]["super_user_id"]
 approve = config["others"]["approve"]
-chatgpt_api = config["others"]["chatgpt_api"]
 lover = config["host"]["lover"]
 robot_name = config["host"]["robot_name"]
 chatgpt_name = config["host"]["chatgpt_name"]
+welcome_to_group = config["others"]["welcome_to_group"]
+menu_1 = config["others"]["menu_1"]
+menu_2 = config["others"]["menu_2"]
 authorize_list = [host, lover]
 
 
@@ -27,25 +29,9 @@ def menu():
     uid = data['user_id']
 
     if "菜单" == message:
-        a = """----------菜单------------
-1.人工智障梦幻（触发词"梦幻"）
-2.转语音（触发词"/"）
-3.彩虹屁（触发词"夸夸xxx"）
-4.一言（触发词"一言"）
-5.点歌（触发词"点歌"）
-6.随机姓名（触发词"给我起个名"）
-7.天气查询（触发词"xxx天气"）
-8.网易云热评"""
+        a = menu_1
         API.send(a)
-        b = """9.视频搜索（触发词搜索视频xxx）
-    10.历史上的今天（触发词"历史上的今天"）
-    11.域名状态查询（"查询域名状态xxx.com"）
-    12.ping（触发词"ping xxx.xxx.xxx"）
-    13.度娘（"度娘什么是xxx"）
-    14.翻译（"翻译一下"）
-    15.b站热门视频（触发词"b站热门视频"）
-    16.摸鱼日历
-    """
+        b = menu_2
         API.send(b)
 
     elif message.startswith(robot_name):
@@ -156,12 +142,11 @@ def menu():
         img_url = API.picture()
         API.send(f"[CQ:image,file={img_url}]")
 
-    elif "叫我主人" == message:
-        user_id = data["user_id"]
+    elif "谁是你主人" == message:
         if uid == host:
-            API.send("好的，主人")
+            API.send("你就是呀")
         else:
-            API.send(f"[CQ:at,qq={user_id}]你是什么东西!!!")
+            API.send(f"[CQ:at,qq={host}] 这就是我主人，我爱的主人")
 
     elif "安慰" in message:
         data = API.an_wei()
@@ -232,7 +217,7 @@ def menu():
         else:
             API.send("该群友还没有权限")
 
-            
+
 def others():
     data = request.get_json()
     self_id = data["self_id"]
@@ -257,7 +242,7 @@ def others():
         notice_type = data["notice_type"]
         user_id = data["user_id"]
         if notice_type == "group_increase":
-            API.other_send_group(f"[CQ:at,qq={user_id}]新来的你先回答以下问题\n1.性别:\n2.年龄:\n3.所在城市:")
+            API.other_send_group(f"[CQ:at,qq={user_id}]" + welcome_to_group)
     elif "flag" in data:
         flag = data["flag"]
         sub_type = data["sub_type"]
