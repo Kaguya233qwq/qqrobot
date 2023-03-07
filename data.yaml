@@ -1,19 +1,19 @@
 host:
-  #Ö÷ÈËQQºÅ
-  super_user_id: 3052405886
-  #ÌØ±ð¹ØÐÄQQºÅ
-  lover:  3561409438
-  #»úÆ÷ÈËÃû×Ö
-  robot_name: ÔÆÃÎ
-  #chatgptµÄÐÕÃûÕâ¸öÒòÎªÇëÇó´ÎÊýÓÐÏÞËùÒÔ¼ÓÁËÈ¨ÏÞÏµÍ³
-  chatgpt_name: ÈðÑ©
+  #ä¸»äººQQå·
+  super_user_id: 123456
+  #ç‰¹åˆ«å…³å¿ƒQQå·
+  lover:  123456
+  #æœºå™¨äººåå­—
+  robot_name: äº‘æ¢¦
+  #chatgptçš„å§“åè¿™ä¸ªå› ä¸ºè¯·æ±‚æ¬¡æ•°æœ‰é™æ‰€ä»¥åŠ äº†æƒé™ç³»ç»Ÿ
+  chatgpt_name: ç‘žé›ª
 others :
-  #ÑûÈºÉêÇëÊÇ·ñÍ¬ÒâTrueÊÇÍ¬Òâ,FalseÊÇ²»Í¬Òâ
+  #é‚€ç¾¤ç”³è¯·æ˜¯å¦åŒæ„Trueæ˜¯åŒæ„,Falseæ˜¯ä¸åŒæ„
   approve: True
-  #chatgptµÄapi¡ªkey
-  chatgpt_api: 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
-  #ÈëÈº»¶Ó­Óï
-  welcome_to_group: »¶Ó­ÈëÈº
-  #²Ëµ¥
-  menu_1: ----------²Ëµ¥1------------[1.ÈË¹¤ÖÇÕÏÃÎ»Ã£¨´¥·¢´Ê"ÃÎ»Ã"£©\n2.×ªÓïÒô£¨´¥·¢´Ê"/"£©][3.²ÊºçÆ¨£¨´¥·¢´Ê"¿ä¿äxxx"£©][4.Ò»ÑÔ£¨´¥·¢´Ê"Ò»ÑÔ"£©][5.µã¸è£¨´¥·¢´Ê"µã¸è"£©][6.Ëæ»úÐÕÃû£¨´¥·¢´Ê"¸øÎÒÆð¸öÃû"£©][7.ÌìÆø²éÑ¯£¨´¥·¢´Ê"xxxÌìÆø"£©][8.ÍøÒ×ÔÆÈÈÆÀ]
-  menu_2: ----------²Ëµ¥2------------[9.ÊÓÆµËÑË÷£¨´¥·¢´ÊËÑË÷ÊÓÆµxxx£©][10.ÀúÊ·ÉÏµÄ½ñÌì£¨´¥·¢´Ê"ÀúÊ·ÉÏµÄ½ñÌì"£©][11.ÓòÃû×´Ì¬²éÑ¯£¨"²éÑ¯ÓòÃû×´Ì¬xxx.com"£©][12.ping£¨´¥·¢´Ê"ping xxx.xxx.xxx"£©\n13.¶ÈÄï£¨"¶ÈÄïÊ²Ã´ÊÇxxx"£©][14.·­Òë£¨"·­ÒëÒ»ÏÂ"£©\n15.bÕ¾ÈÈÃÅÊÓÆµ£¨´¥·¢´Ê"bÕ¾ÈÈÃÅÊÓÆµ"£©][16.ÃþÓãÈÕÀú
+  #chatgptçš„apiâ€”key
+  chatgpt_api: sk-xxxxxx
+  #å…¥ç¾¤æ¬¢è¿Žè¯­
+  welcome_to_group: æ¬¢è¿Žå…¥ç¾¤
+  #èœå•
+  menu_1: ----------èœå•1------------[1.äººå·¥æ™ºéšœæ¢¦å¹»ï¼ˆè§¦å‘è¯"æ¢¦å¹»"ï¼‰\n2.è½¬è¯­éŸ³ï¼ˆè§¦å‘è¯"/"ï¼‰][3.å½©è™¹å±ï¼ˆè§¦å‘è¯"å¤¸å¤¸xxx"ï¼‰][4.ä¸€è¨€ï¼ˆè§¦å‘è¯"ä¸€è¨€"ï¼‰][5.ç‚¹æ­Œï¼ˆè§¦å‘è¯"ç‚¹æ­Œ"ï¼‰][6.éšæœºå§“åï¼ˆè§¦å‘è¯"ç»™æˆ‘èµ·ä¸ªå"ï¼‰][7.å¤©æ°”æŸ¥è¯¢ï¼ˆè§¦å‘è¯"xxxå¤©æ°”"ï¼‰][8.ç½‘æ˜“äº‘çƒ­è¯„]
+  menu_2: ----------èœå•2------------[9.è§†é¢‘æœç´¢ï¼ˆè§¦å‘è¯æœç´¢è§†é¢‘xxxï¼‰][10.åŽ†å²ä¸Šçš„ä»Šå¤©ï¼ˆè§¦å‘è¯"åŽ†å²ä¸Šçš„ä»Šå¤©"ï¼‰][11.åŸŸåçŠ¶æ€æŸ¥è¯¢ï¼ˆ"æŸ¥è¯¢åŸŸåçŠ¶æ€xxx.com"ï¼‰][12.pingï¼ˆè§¦å‘è¯"ping xxx.xxx.xxx"ï¼‰\n13.åº¦å¨˜ï¼ˆ"åº¦å¨˜ä»€ä¹ˆæ˜¯xxx"ï¼‰][14.ç¿»è¯‘ï¼ˆ"ç¿»è¯‘ä¸€ä¸‹"ï¼‰\n15.bç«™çƒ­é—¨è§†é¢‘ï¼ˆè§¦å‘è¯"bç«™çƒ­é—¨è§†é¢‘"ï¼‰][16.æ‘¸é±¼æ—¥åŽ†
