@@ -8,10 +8,7 @@
 安装依赖
 
 ~~~python
-pip install flask
-pip install requests
-pip install openai
-pip install pyyaml
+pip istall -r requirements.txt
 ~~~
 
 
@@ -19,7 +16,7 @@ pip install pyyaml
 ## 部署方法
 
 
-首先打开info.ini填写主人QQ号,以及openai的apikey,打开qq_login 双击config.yml 然后按照提示写QQ号，然后双击go-cqhttp.bat 运行用机器人qq扫码登录。
+首先打开data.yaml填写主人QQ号,以及cluai的apikey还有邮箱的一些东西，不需要可以不用配置,打开qq_login 双击config.yaml 然后按照提示写QQ号和密码，然后双击go-cqhttp.bat 运行用机器人然后滑块验证登录。
 
 然后到项目根目录打开cmd 输入
 
@@ -77,7 +74,6 @@ setx /M PATH "C:\Program Files\ffmpeg\bin;%PATH%"
 回车出现成功就行
 
 至此安装完成
-进入info.ini按照提示填写
 
 ### 本机器人目前功能有
 
