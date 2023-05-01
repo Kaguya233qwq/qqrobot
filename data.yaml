@@ -1,21 +1,26 @@
-host:
-  #主人QQ号
-  super_user_id: 3052405886
-  #特别关心QQ号
-  lover:  123456
+initialization:
+  #入群邀请是否同意
+  approve: true
+  #cluai的key，去https://www.clueai.cn/申请
+  chatgpt_api: xxxx
   #机器人名字
-  robot_name: 云梦
-  #chatgpt的姓名这个因为请求次数有限所以加了权限系统
-  chatgpt_name: 瑞雪
-others :
-  #邀群申请是否同意True是同意,False是不同意
-  approve: True
-  #chatgpt的api—key
-  chatgpt_api: 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
-  #入群欢迎语
-  welcome_to_group: 欢迎入群
-  #是否关闭入群欢迎
-  welcome: true
-  #菜单
-  menu_1: ----------菜单1------------[1.人工智障梦幻（触发词"梦幻"）\n2.转语音（触发词"/"）][3.彩虹屁（触发词"夸夸xxx"）][4.一言（触发词"一言"）][5.点歌（触发词"点歌"）][6.随机姓名（触发词"给我起个名"）][7.天气查询（触发词"xxx天气"）][8.网易云热评]
-  menu_2: ----------菜单2------------[9.视频搜索（触发词搜索视频xxx）][10.历史上的今天（触发词"历史上的今天"）][11.域名状态查询（"查询域名状态xxx.com"）][12.ping（触发词"ping xxx.xxx.xxx"）\n13.度娘（"度娘什么是xxx"）][14.翻译（"翻译一下"）\n15.b站热门视频（触发词"b站热门视频"）][16.摸鱼日历
+  chatgpt_name: chatgpt机器人
+  #主人QQ号
+  host: 12345678
+  #特别关照的人
+  monitor: 12345678
+  #特别关照的群
+  monitor_group: 12345678
+  #端口，一般不用更改
+  port: http://127.0.0.1:5700
+  #回复概率
+  robot_answer: 0.02
+  #机器人名字
+  robot_name: 机器人
+  #去qq邮箱申请
+  mail_key: xxxxxxx
+  #邮箱地址，本人的
+  mail_address: xxxxxx@qq.com
+other_information:
+  menu: "\u673A\u5668\u4EBA\u5236\u4F5C\u6559\u7A0B:https://github.com/luoguixin/qqrobot\n\
+    \u4F5C\u8005:\u4E91\u6DF1\u4E0D\u77E5\u5904\n[CQ:image,file=7d7dae6bf1d5b22c1cebde9d2a87491e.image,subType=0,url=https://gchat.qpic.cn/gchatpic_new/3052405886/583218403-2750737236-7D7DAE6BF1D5B22C1CEBDE9D2A87491E/0?term=3&amp;is_origin=0]"
