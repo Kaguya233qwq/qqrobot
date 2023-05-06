@@ -5,6 +5,8 @@ initialization:
   chatgpt_api: xxxx
   #机器人名字
   chatgpt_name: chatgpt机器人
+  api_key: none
+  api_secret: none
   #主人QQ号
   host: 12345678
   #特别关照的人
