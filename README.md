@@ -8,7 +8,7 @@
 安装依赖
 
 ~~~python
-pip istall -r requirements.txt
+pip install -r requirements.txt
 ~~~
 
 
