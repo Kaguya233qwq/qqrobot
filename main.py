@@ -1,15 +1,23 @@
 import datetime
+import logging
 import sqlite3
 import time
-import redis
-import yaml
-import menu
-from flask import Flask, request
-import requests
 from threading import Timer
 import clueai
+import redis
+import requests
+import yaml
 from fake_useragent import UserAgent
+from flask import Flask, request
+from gevent import pywsgi
+import menu
+from colorlog_format import ColoredLogger
 
+conn_station = False
+
+logging.setLoggerClass(ColoredLogger)
+color_log = logging.getLogger("robot")
+color_log.setLevel(logging.DEBUG)
 ua = UserAgent()
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
@@ -20,8 +28,6 @@ chatgpt_api = config["initialization"]["chatgpt_api"]
 monitor = config["initialization"]["monitor"]
 approve = config["initialization"]["approve"]
 port = config["initialization"]["port"]
-mail_key = config["initialization"]["mail_key"]
-mail_address = config["initialization"]["mail_address"]
 app = Flask(__name__)
 
 
@@ -29,14 +35,12 @@ class API:
     def __init__(self):
         self.port = port
         self.host = config["initialization"]["host"]
-        self.api_keys = config["initialization"]["api_key"]
         self.chatgpt_api = chatgpt_api
-        self.api_secrets = config["initialization"]["api_secret"]
         self.approve = approve
         self.monitor = monitor
         self.monitor_group = config["initialization"]["monitor_group"]
 
-    def send(self, message):
+    def send(self, message):  # TODO:发送消息不分信息类型
         data = request.get_json()
         message_type = data['message_type']
         if 'group' == message_type:
@@ -58,7 +62,7 @@ class API:
         url = f"{self.port}/send_msg"
         requests.get(url, params=params)
 
-    def other_send_group(self, message):
+    def other_send_group(self, message):  # TODO:发送群聊信息
         group_id = self.monitor_group
         params = {
             "auto_escape": False,
@@ -68,7 +72,7 @@ class API:
         url = f"{self.port}/send_group_msg"
         requests.get(url, params=params)
 
-    def other_send_private(self, message, group_id=None):
+    def other_send_private(self, message, group_id=None):  # TODO:发送私聊信息，不支持临时会话
         data = request.get_json()
         user_id = data["user_id"]
         params = {
@@ -81,12 +85,12 @@ class API:
         requests.get(url, params=params)
 
     @staticmethod
-    def abuse():
+    def abuse():  # TODO:一个一言api
         url = "https://xiaoapi.cn/API/yiyan.php"
         resp = requests.get(url)
         return resp.text
 
-    def other_send_host(self, message):
+    def other_send_host(self, message):  # TODO:发送消息给机器人主人
         params = {
             "auto_escape": False,
             "message": message,
@@ -96,14 +100,14 @@ class API:
         requests.get(url, params=params)
 
     @staticmethod
-    def picture():
+    def picture():  # TODO:一个图片api返回随机图片链接
         url = "https://img.xjh.me/random_img.php?return=json"
         esp = requests.get(url)
         url_img = esp.json()["img"]
         urls_n_img = f"https:{url_img}"
         return urls_n_img
 
-    def other_send_group_poke(self, message):
+    def other_send_group_poke(self, message):  # TODO: 发送戳一戳信息,需要传入信息，当用户戳机器人时发送信息
         data = request.get_json()
         group_id = data["group_id"]
         params = {
@@ -115,7 +119,7 @@ class API:
         requests.get(url, params=params)
 
     @staticmethod
-    def girl_url():
+    def girl_url():  # TODO: 一个api返回视频链接，相当于随机视频
         url = "https://v.api.aa1.cn/api/api-girl-11-02/index.php"
         params = {
             "type": "json"
@@ -125,7 +129,7 @@ class API:
         return data
 
     @staticmethod
-    def bilbil_content(oid):
+    def bilbil_content(oid):  # TODO: 获取某个up主的个人主页信息
         url = f"https://api.bilibili.com/x/v2/reply?&type=1&pn=1&oid={oid}"
         headers = {"user-agent": ua.chrome}
         resp = requests.get(url, headers=headers)
@@ -165,12 +169,12 @@ class API:
     def send_mail(user_name, user_id, title, message):
         url = "https://api.wer.plus/api/qqmail"
         params = {
-            "me": mail_address,
+            "me": "luoguixinduide@foxmail.com",
             "name": user_name,
             "to": f"{user_id}@qq.com",
             "title": title,
             "text": message,
-            "key": mail_key
+            "key": "nzlbpmnflrjcdfdd"
         }
 
         resp = requests.get(url, params=params)
@@ -190,7 +194,7 @@ class API:
         return prediction.generations[0].text
 
     @staticmethod
-    def save_message():
+    def save_message():  # TODO:这个函数用于储存消息，用于机器人于用户交互
         data = request.get_json()
         uid = data['user_id']
         message = data['message']
@@ -210,7 +214,13 @@ class API:
         conn.close()
 
     @staticmethod
-    def reply(message_id):
+    def xiao_rou(message):
+        url = f"https://v1.apigpt.cn/?q={message}&apitype=sql"
+        data = requests.get(url)
+        return data.json()["ChatGPT_Answer"]
+
+    @staticmethod
+    def reply(message_id):  # TODO:与前面的save_message函数联用,这个需要传入message_id，返回信息
         conn = sqlite3.connect("bot.db")
         c = conn.cursor()
         c.execute("SELECT * FROM message WHERE message_id = ?", (message_id,))
@@ -290,13 +300,16 @@ class API:
 
 @app.route('/', methods=["POST"])
 def post_data():
+    global conn_station
+    if not conn_station:
+        color_log.info("连接成功")
+    conn_station = True
     data = request.get_json()
     api = API()
-    print(data)
     if data['post_type'] == 'message':
         api.save_message()
         message = data['message']
-        print(message)
+        color_log.info(message)
         menu.menu()
     else:
         menu.other_menu()
@@ -330,8 +343,12 @@ def loop_monitor():
 
 
 if __name__ == '__main__':
+    color_log.info("启动完成")
     f2 = open("qq_login/config.yml", "r", encoding="utf-8")
     config2 = yaml.safe_load(f2)
     f2.close()
+    color_log.info("定时任务启动完成")
     loop_monitor()
-    app.run(host='0.0.0.0', port=int(config2["servers"][0]["http"]["post"][-1]["url"].split(":")[-1].replace("/", "")))
+    server = pywsgi.WSGIServer(
+        ('0.0.0.0', int(config2["servers"][0]["http"]["post"][-1]["url"].split(":")[-1].replace("/", ""))), app)
+    server.serve_forever()

@@ -2,12 +2,14 @@ import os
 import random
 import re
 import selenuims
+import clueai
 from flask import request
-from main import API, config, approve
+from main import API, config, approve, chatgpt_api
 import psutil
 import platform
 import plugin
 from clueai.error import ClueaiError
+from requests.exceptions import JSONDecodeError
 
 host = config["initialization"]["host"]
 monitor = config["initialization"]["monitor"]
@@ -55,7 +57,7 @@ def menu():
                      f"\n获取系统名称{platform.system()}\n处理器类型{platform.processor()}")
         elif group_id not in group_list:
             new_message = str(re.findall(f"{robot_name}(.*)", message)[0])
-            result = api.free_gpt(new_message)
+            result = api.xiao_rou(new_message)
             api.send(result)
 
     elif message_type == "private":
@@ -69,10 +71,6 @@ def menu():
             api.send("你好像被加入黑名单了你想想你干了什么")
         elif "机器人" in message:
             api.send("我是真人，我只是模仿机器人")
-        elif "视频" in message:
-            api.send("视频需要时间请勿重复发送")
-            girl_url = api.girl_url()
-            api.send(f"[CQ:video,file=http:{girl_url}]")
         elif group_id not in group_list:
             try:
                 result = api.free_gpt(new_message)
@@ -121,6 +119,16 @@ def menu():
         else:
             api.send(f"本群{chatgpt_name}一直没有跑路哦，一直在哦!")
 
+    elif message.startswith("查看使用量"):
+        try:
+            if "查看使用量" in message:
+                cl = clueai.Client(chatgpt_api)
+                data = cl.check_usage(finetune_user=False)
+                a = data["使用量"]
+                api.send(f"已使用{a}次调用")
+        except JSONDecodeError:
+            api.send("格式错误")
+
     elif message == "只听我的":
         group_id = data["group_id"]
         if user_id == host:
@@ -140,8 +148,8 @@ def menu():
         else:
             api.send("主人,我正在和大家一起玩哦!")
 
-    elif message.startswith("搜索") and user_id == host:
-        new_message = re.findall("搜索(.*)", message)[0]
+    elif message.startswith("搜") and user_id == host:
+        new_message = re.findall("搜(.*)", message)[0]
         api.send(f"正在搜索{new_message}")
         img_file = __file__
         path_list = str(img_file).split('\\')[:-1]
