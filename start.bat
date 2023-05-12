@@ -9,7 +9,7 @@ echo Dont close this window !!!
 python main.py
 IF %ERRORLEVEL% NEQ 0 (
     echo Failed to run main.py, installing requests package...
-    pip install requests
+    pip install -r requirements.txt
     echo Attempting to run main.py again...
     python main.py
 )
