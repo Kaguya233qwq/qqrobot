@@ -90,4 +90,4 @@ setx /M PATH "C:\Program Files\ffmpeg\bin;%PATH%"
 ~~~cmd
 .\go–cqhttp.exe update
 ~~~
-然后输入y回车就能更新了,之后吧原来的那个删掉就行了
+然后输入y回车就能更新了,之后把原来的那个删掉就行了
