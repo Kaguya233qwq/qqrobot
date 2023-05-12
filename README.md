@@ -16,14 +16,13 @@ pip install -r requirements.txt
 ## 部署方法
 
 
-首先打开data.yaml填写主人QQ号,以及cluai的apikey还有邮箱的一些东西，邮箱不需要可以不用配置,打开qq_login 双击config.yaml 然后按照提示写QQ号和密码，然后双击go-cqhttp.bat 运行用机器人然后滑块验证登录。
+首先打开data.yaml填写主人QQ号,以及cluai的apikey还有邮箱的一些东西，邮箱不需要可以不用配置,打开qq_login 双击config.yaml 然后按照提示写QQ号和密码，然后双击go-cqhttp.bat 运行用机器人然后滑块验证登录。然后关闭这个窗口
 
-然后到项目根目录打开cmd 输入
-
+点start.bat
+如果出现爆红可以按照翻译，差什么模块就输入
 ~~~cmd
-python main.py
+pip install 模块名
 ~~~
-或者直接点start.bat
 
 ### 安装ffmpeg
 
