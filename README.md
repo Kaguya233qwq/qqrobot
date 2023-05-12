@@ -84,6 +84,8 @@ setx /M PATH "C:\Program Files\ffmpeg\bin;%PATH%"
 
 可以加qq群784469488
 也可以加本人qq3052405886(有很多隐藏指令,只是因为我不想写那么多菜单，请见谅)
+
+
 如果配置不成功或者qq登录不上，可以在login_qq目录下打开cmd输入
 ~~~cmd
 .\go–cqhttp.exe update
