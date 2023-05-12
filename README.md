@@ -23,6 +23,7 @@ pip install -r requirements.txt
 ~~~cmd
 python main.py
 ~~~
+或者直接点start.bat
 
 ### 安装ffmpeg
 
