@@ -1,7 +1,7 @@
 import os
 import random
 import re
-import selenuims
+from ..modules import selenuims
 import clueai
 from flask import request
 import psutil

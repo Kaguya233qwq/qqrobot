@@ -1,6 +1,5 @@
 from robot.modules import scheduler
 from robot.util import config
-from robot.util.logger import Logger
 from robot.modules import server
 
 if __name__ == '__main__':
